@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.network.apiSocialNetwork.entity.Community;
 import com.network.apiSocialNetwork.service.CommunityService;
+import com.network.apiSocialNetwork.dto.CommunityRequestDTO;
 
 import jakarta.validation.Valid;
 
@@ -21,8 +22,8 @@ public class CommunityController {
     }
 
     @PostMapping("/create-community")
-    public ResponseEntity<Community> creatCommunity(@Valid @RequestBody String name) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(communityService.createCommunity(name));
+    public ResponseEntity<Community> creatCommunity(@Valid @RequestBody CommunityRequestDTO communityRequestDTO) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(communityService.createCommunity(communityRequestDTO.getName()));
     }
 
     @GetMapping("/list-communities")
