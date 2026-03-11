@@ -1,5 +1,7 @@
 package com.network.apiSocialNetwork.dto;
 
+import com.network.apiSocialNetwork.entity.Post;
+
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -18,13 +20,15 @@ public class PostRequestDTO {
     public PostRequestDTO() {
     }
 
+    public PostRequestDTO(String userName, String content, Integer likes, Long communityId) {
+        this.userName = userName;
+        this.content = content;
+        this.likes = likes;
+        this.communityId = communityId;
+    }
+
     public String getUserName() { return userName; }
     public String getContent() { return content; }
     public Integer getLikes() { return likes; }
     public Long getCommunityId() { return communityId; }
-
-    public void setUserName(String userName) { this.userName = userName; }
-    public void setContent(String content) { this.content = content; }
-    public void setLikes(Integer likes) { this.likes = likes; }
-    public void setCommunityId(Long communityId) { this.communityId = communityId; }
 }
