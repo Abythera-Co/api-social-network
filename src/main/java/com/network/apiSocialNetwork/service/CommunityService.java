@@ -3,9 +3,10 @@ package com.network.apiSocialNetwork.service;
 import com.network.apiSocialNetwork.entity.Community;
 import com.network.apiSocialNetwork.entity.Post;
 import com.network.apiSocialNetwork.repository.CommunityRepository;
-import org.springframework.stereotype.Service;
-
 import com.network.apiSocialNetwork.exception.ExistingCommunityException;
+
+import org.springframework.stereotype.Service;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -17,8 +18,8 @@ public class CommunityService {
         this.communityRepository = communityRepository;
     }
 
-    public List<Community> getAllCommunities() {
-        return communityRepository.findAll();
+    public List<Community> getAllCommunities(Pageable pageable) {
+        return communityRepository.findAll(pageable).getContent();
     }
 
     public Community getCommunityById(Long id) {
@@ -26,7 +27,7 @@ public class CommunityService {
     }
 
     public Community createCommunity(String name) {
-        List<Community> communities = getAllCommunities();
+        List<Community> communities = getAllCommunities(Pageable.unpaged());
         for (Community community : communities) {
             if (community.getName().equalsIgnoreCase(name)) {
                 throw new ExistingCommunityException("Community with the same name already exists");

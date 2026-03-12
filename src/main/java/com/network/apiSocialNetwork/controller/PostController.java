@@ -11,6 +11,7 @@ import com.network.apiSocialNetwork.dto.PostResponseDTO;
 import com.network.apiSocialNetwork.entity.Post;
 import com.network.apiSocialNetwork.service.PostService;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 
 import jakarta.validation.Valid;
 
@@ -38,7 +39,7 @@ public class PostController {
     }
 
     @GetMapping("/list-posts")
-    public ResponseEntity<List<PostResponseDTO>> listPosts(Pageable pageable) {
+    public ResponseEntity<List<PostResponseDTO>> listPosts(@PageableDefault(size=10) Pageable pageable) {
         List<Post> posts = postService.getAllPosts(pageable);
         List<PostResponseDTO> response = new ArrayList<>();
         for (Post post : posts) {
